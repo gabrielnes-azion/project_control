@@ -1,4 +1,4 @@
-# Team Activity CLI
+# Project Control - Team Activity CLI
 
 CLI tool to fetch team activities from Jira and GitHub.
 
