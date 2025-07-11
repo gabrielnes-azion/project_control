@@ -58,8 +58,8 @@ class JiraClient:
                     history_date = datetime.fromisoformat(history["created"].replace('Z', '+00:00'))
                     if start_date <= history_date.replace(tzinfo=None) <= end_date:
                         for item in history.get("items", []):
-                            # Skip description field changes
-                            if item['field'] == 'description':
+                            # Skip description field and Bug Template changes
+                            if item['field'] in ['description', 'Bug Template']:
                                 continue
                             change_desc = f"{item['field']}: {item.get('fromString', 'None')} → {item.get('toString', 'None')}"
                             recent_changes.append(change_desc)

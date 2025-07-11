@@ -36,6 +36,7 @@ def main():
     parser.add_argument("--team", required=True, help="Team slug (e.g., api)")
     parser.add_argument("--days", type=int, default=1, help="Number of days to look back (default: 1)")
     parser.add_argument("--verbose", action="store_true", help="Enable verbose debug output")
+    parser.add_argument("--only-title", action="store_true", help="Show only Jira issue titles without changes")
     
     args = parser.parse_args()
     verbose = args.verbose
@@ -97,7 +98,7 @@ def main():
                 print("📋 Jira Activities:")
                 for issue in jira_issues:
                     print(f"  • {issue['key']}: {issue['summary']}")
-                    if issue.get('changes'):
+                    if not args.only_title and issue.get('changes'):
                         for change in issue['changes']:
                             print(f"    └─ {change}")
             else:
